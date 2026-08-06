@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  name           String
+  username       String   @unique
+  email          String   @unique
+  studentId      String?  @unique
+  program        String?
+  role           String   @default("STUDENT") // ADMIN or STUDENT
+  status         String   @default("Active")  // Active or Suspended
+  passwordHash   String
+  passwordSalt   String
+  profilePicture String?
+  createdAt      DateTime @default(now())
+
+  borrowRecords          BorrowRecord[]
+  transactions           BorrowTransaction[]
+  passwordResetRequests  PasswordResetRequest[]
+
+  @@map("users")
+}
+
+model Book {
+  id              Int     @id @default(autoincrement())
+  bookCode        String  @unique
+  authorName      String
+  bookTitle       String
+  category        String?
+  publicationYear String?
+  isBorrowed      Boolean @default(false)
+  totalCopies     Int     @default(1)
+  availableCopies Int     @default(1)
+
+  borrowRecords BorrowRecord[]
+  transactions  BorrowTransaction[]
+
+  @@map("books")
+}
+
+model BorrowRecord {
+  id                 Int       @id @default(autoincrement())
+  bookCode           String
+  bookTitle          String
+  studentName        String?
+  studentId          String?
+  studentEmail       String?
+  borrowDate         DateTime
+  returnDate         DateTime
+  actualReturnDate   DateTime?
+  status             String    @default("borrowed") // borrowed, returned, damaged, lost, return_requested
+  finePaid           Boolean   @default(false)
+  customFine         Int       @default(0)
+  paymentStatus      String    @default("unrequested") // unrequested, pending, paid
+  paymentRequestedAt DateTime?
+  createdAt          DateTime  @default(now())
+
+  book    Book  @relation(fields: [bookCode], references: [bookCode], onDelete: Cascade)
+  student User? @relation(fields: [studentEmail], references: [email], onDelete: SetNull)
+
+  @@map("borrow_records")
+}
+
+model BorrowTransaction {
+  id         String    @id
+  userId     String
+  userName   String?
+  userEmail  String?
+  bookId     String
+  bookTitle  String
+  borrowDate DateTime
+  dueDate    DateTime
+  status     String    @default("pending") // pending, PENDING_ADMIN_CLAIM, BORROWED, CANCELLED, EXPIRED
+  createdAt  DateTime  @default(now())
+  verifiedAt DateTime?
+
+  user User @relation(fields: [userId], references: [studentId], onDelete: Cascade)
+  book Book @relation(fields: [bookId], references: [bookCode], onDelete: Cascade)
+
+  @@map("borrow_transactions")
+}
+
+model PasswordResetRequest {
+  id           Int       @id @default(autoincrement())
+  username     String?
+  email        String?
+  role         String?
+  status       String    @default("Pending") // Pending, Approved, Rejected
+  passwordHash String?
+  passwordSalt String?
+  otp          String?
+  requestedAt  DateTime  @default(now())
+  decidedAt    DateTime?
+  decisionBy   String?
+  decisionNote String?
+
+  user User? @relation(fields: [email], references: [email], onDelete: Cascade)
+
+  @@map("password_reset_requests")
+}
