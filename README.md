@@ -30,7 +30,7 @@ The **ALIW Library Management System (Web Edition V2.0)** is a modern full-stack
 
 ---
 
-## 🔐 Security & PasswordParity
+## 🔐 Security & Password Parity
 
 - **PBKDF2 Hashing**: Uses Node.js `crypto.pbkdf2Sync` (SHA-256 with 100,000 iterations and 32-byte salt) ensuring 100% byte-for-byte compatibility with legacy database passwords.
 - **Rate-Limiting Lockout**: 5 consecutive failed login attempts trigger a 30-second security lockout timer.
@@ -100,11 +100,11 @@ The **ALIW Library Management System (Web Edition V2.0)** is a modern full-stack
 
 ---
 
-## 👥 Developers & Credits
+## 👥 Project Team & Credits
 
-- **Manuel Zian Kyle Piangco** — *Lead Documentation & Code*
-- **Joshua Enriquez** — *Full Stack & Backend*
-- **Huan Marzan** — *Full Stack Developer (UI/UX)*
+- **Manuel Zian Kyle Piangco** — *Lead Developer & Software Architect (Lead Coder)* 💻
+- **Joshua Enriquez** — *Full Stack & Backend Engineer* ⚙️
+- **Huan Marzan** — *Documentation & Paperwork Specialist* 📝
 
 ---
 
