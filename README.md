@@ -102,7 +102,7 @@ The **ALIW Library Management System (Web Edition V2.0)** is a modern full-stack
 
 ## 👥 Project Team & Credits
 
-- **Manuel Zian Kyle Piangco** — *Lead Developer & Software Architect (Lead Coder)* 💻
+- **Manuel Zian Kyle Piangco** — *Lead Developer & Software Architect * 
 - **Joshua Enriquez** — *Full Stack & Backend Engineer* ⚙️
 - **Huan Marzan** — *Documentation & Paperwork Specialist* 📝
 
