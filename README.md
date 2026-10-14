@@ -78,7 +78,7 @@ Then open [http://localhost:5555](http://localhost:5555).
 ## Team
 
 - **Manuel Zian Kyle Piangco** — Lead Developer & Software Architect
-- **Joshua Enriquez** — Full Stack & Backend Engineer
+- **Joshua R. Enriquez** — Full Stack & Backend Engineer
 - **Huan Marzan** — Documentation & Paperwork
 
 ---
